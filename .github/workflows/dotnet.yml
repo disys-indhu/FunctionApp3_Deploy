@@ -20,9 +20,6 @@ jobs:
           enable-AzPSSession: true
           allow-no-subscriptions: true
 
-      - name: Deploy Function App
-        run: |
-          az functionapp deployment source config-zip \
-            --resource-group 481-3719fecc-build-and-distribute-an-app-in-app-ce \
-            --name SecondFunctionApp02 
+      - name: Deploy
+        run: az functionapp deploy --resource-group NewResourceGroup --name DeployFunctionApp01 
             
