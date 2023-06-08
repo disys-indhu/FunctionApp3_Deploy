@@ -22,4 +22,5 @@ jobs:
           az functionapp deploy \
             --resource-group 481-00be1967-build-and-distribute-an-app-in-app-ce \
             --name SecondFunctionApp02 \
-            --src-path "C:\\Users\\Indhumathi.Ramesh\\OneDrive - DISYS\\Documents\\FunctionApp3\\FunctionApp3\\FunctionApp3.zip"
+            --type zip \
+            --src-path "C:/Users/Indhumathi.Ramesh/OneDrive - DISYS/Documents/FunctionApp3/FunctionApp3/FunctionApp3.zip"
