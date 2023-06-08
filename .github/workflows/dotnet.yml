@@ -8,19 +8,16 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Azure Login
-        run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-      - name: Setup Azure Functions
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 6.0.x
-          azure-cli-version: 2.30.0
-          azure-functions-version: 3.0.300
-      - name: Configure Deployment Source
-        run: az functionapp deployment source config --name SecondFunctionApp02 --resource-group 481-3719fecc-build-and-distribute-an-app-in-app-ce --repo-url https://github.com/disys-indhu/FunctionApp3_Deploy.git --branch master --manual-integration
-      - name: Deploy
-        run: az functionapp deployment source sync --name SecondFunctionApp02 --resource-group 481-3719fecc-build-and-distribute-an-app-in-app-ce
+    - uses: actions/checkout@v3
+    - name: Setup Azure Functions
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+        azure-cli-version: 2.30.0
+        azure-functions-version: 3.0.300
+    - name: Deploy
+      run: az functionapp deploy --resource-group 481-69733883-build-and-distribute-an-app-in-app-ce --name SecondFunctionApp02
