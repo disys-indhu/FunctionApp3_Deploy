@@ -20,6 +20,11 @@ jobs:
           enable-AzPssession: true
           allow-no-subscriptions: true
 
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          
+
       - name: Deploy Function App
         run: |
           az functionapp deployment source config-zip \
