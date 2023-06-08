@@ -1,0 +1,25 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Azure Functions
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+          azure-cli-version: 2.30.0
+          azure-functions-version: 3.0.300
+      - name: Deploy
+        run: |
+          az functionapp deploy \
+            --resource-group 481-00be1967-build-and-distribute-an-app-in-app-ce \
+            --name SecondFunctionApp02 \
+            --src-path "C:\\Users\\Indhumathi.Ramesh\\OneDrive - DISYS\\Documents\\FunctionApp3\\FunctionApp3\\FunctionApp3.zip"
