@@ -1,4 +1,5 @@
-name: Deploy to Azure Function App
+name: Deploy Function App
+
 on:
   push:
     branches:
@@ -9,23 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
+      - name: Set up Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPssession: true
+          allow-no-subscriptions: true
 
-    - name: Build
-      run: dotnet build --configuration Release
-
-    - name: Publish
-      run: dotnet publish --configuration Release --output ./publish
-
-    - name: Deploy to Azure
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: SecondFunctionApp02
-        slot-name: production # Modify if using deployment slots
-        publish-profile: ${{ secrets.AZURE_FUNCTION_APP_PUBLISH_PROFILE }}
+      - name: Deploy Function App
+        run: |
+          az functionapp deployment source config-zip \
+            --resource-group 481-3719fecc-build-and-distribute-an-app-in-app-ce \
+            --name SecondFunctionApp02 
+            
