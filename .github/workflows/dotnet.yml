@@ -3,7 +3,7 @@ name: Deploy Function App
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Azure CLI
-        uses: azure/login@v1
+        uses: azure/login@v3
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -23,4 +23,4 @@ jobs:
           az functionapp deployment source config-zip \
             --resource-group 481-3719fecc-build-and-distribute-an-app-in-app-ce \
             --name SecondFunctionApp02 \
-            --src /FunctionApp3/FunctionApp3.zip
+            --src /FunctionApp3
