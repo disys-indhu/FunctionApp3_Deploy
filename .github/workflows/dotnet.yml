@@ -21,5 +21,11 @@ jobs:
           allow-no-subscriptions: true
 
       - name: Deploy
-        run: az functionapp deploy --resource-group NewResourceGroup --name DeployFunctionApp01 
+        uses: azure/webapps-deploy@v2
+        with:
+         app-name: 'DeployFunctionApp01'
+         slot-name: 'UAT'
+         package: .
+        
+
             
