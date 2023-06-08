@@ -1,23 +1,26 @@
-name: .NET
+name: Deploy Function App
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
 
 jobs:
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup Azure Functions
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-        azure-cli-version: 2.30.0
-        azure-functions-version: 3.0.300
-    - name: Deploy
-      run: az functionapp deploy --resource-group 481-69733883-build-and-distribute-an-app-in-app-ce --name SecondFunctionApp02 --src-url https://secondfunctionapp02.azurewebsites.net
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Function App
+        run: |
+          az functionapp deployment source config-zip \
+            --resource-group 481-3719fecc-build-and-distribute-an-app-in-app-ce \
+            --name SecondFunctionApp02 \
+            --src /FunctionApp3
