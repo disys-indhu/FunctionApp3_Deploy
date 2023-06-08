@@ -20,4 +20,4 @@ jobs:
         azure-cli-version: 2.30.0
         azure-functions-version: 3.0.300
     - name: Deploy
-      run: az functionapp deploy --resource-group 481-69733883-build-and-distribute-an-app-in-app-ce --name SecondFunctionApp02
+      run: az functionapp deploy --resource-group 481-69733883-build-and-distribute-an-app-in-app-ce --name SecondFunctionApp02 --src-url https://secondfunctionapp02.azurewebsites.net
