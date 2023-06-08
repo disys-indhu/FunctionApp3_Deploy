@@ -19,6 +19,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
           allow-no-subscriptions: true
+      - run: az account set --subscription 23dedca3-2d6f-4822-a69c-d354f6f9e298
 
       - name: Deploy
         uses: azure/webapps-deploy@v2
